@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人是消费者非生产者</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#12121a;--border:#2a2a3a;--gold:#c8a84b;--gold-light:#e8c86a;--text:#e8e4d8;--muted:#888070;--accent:#4a7c9e;--red:#c04040}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 24px;position:relative}
+.hero-eyebrow{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-title{font-family:'Noto Serif SC',serif;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:900;line-height:1.15;margin-bottom:24px;opacity:0;animation:fadeUp .9s .4s forwards}
+.hero-title em{font-style:normal;color:var(--gold)}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--muted);max-width:680px;margin-bottom:48px;opacity:0;animation:fadeUp .9s .6s forwards}
+.hero-nav{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;opacity:0;animation:fadeUp .9s .8s forwards}
+.hero-nav a{display:inline-block;padding:10px 22px;border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.85rem;letter-spacing:.06em;transition:all .25s;background:rgba(255,255,255,.02)}
+.hero-nav a:hover{border-color:var(--gold);color:var(--gold)}
+.section{max-width:860px;margin:0 auto;padding:80px 24px;border-top:1px solid var(--border);opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.section.visible{opacity:1;transform:none}
+.section-label{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.section-title{font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;line-height:1.3;margin-bottom:28px}
+.section-title .highlight{color:var(--gold)}
+.section p{font-size:1.05rem;color:#c8c0b0;margin-bottom:18px;max-width:720px}
+.callout{border-left:3px solid var(--gold);background:rgba(200,168,75,.05);padding:20px 24px;margin:28px 0;font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;color:var(--gold-light);line-height:1.7}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:32px 0;border:1px solid var(--border)}
+.compare-header{padding:14px 20px;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500}
+.compare-header.bad{background:rgba(192,64,64,.12);color:var(--red)}
+.compare-header.good{background:rgba(200,168,75,.12);color:var(--gold)}
+.compare-cell{padding:14px 20px;font-size:.92rem;color:#b0a898;border-top:1px solid var(--border);line-height:1.6}
+.compare-cell.bad{background:rgba(192,64,64,.04)}
+.compare-cell.good{background:rgba(200,168,75,.04)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2px;margin:32px 0}
+.card{background:var(--surface);border:1px solid var(--border);padding:28px 24px;transition:border-color .2s}
+.card:hover{border-color:var(--gold)}
+.card-num{font-size:2.5rem;font-family:'Noto Serif SC',serif;font-weight:900;color:rgba(200,168,75,.2);line-height:1;margin-bottom:12px}
+.card-title{font-weight:500;font-size:1rem;color:var(--text);margin-bottom:10px}
+.card-body{font-size:.88rem;color:var(--muted);line-height:1.7}
+.formula{background:var(--surface);border:1px solid var(--border);padding:28px 32px;margin:28px 0;font-family:'Noto Serif SC',serif;font-size:1.05rem;color:var(--text);line-height:2}
+.formula .eq{color:var(--gold);font-weight:700}
+.formula .note{font-family:'Noto Sans SC',sans-serif;font-size:.82rem;color:var(--muted);margin-top:8px}
+footer{text-align:center;padding:60px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:.82rem}
+footer strong{color:var(--gold);display:block;font-family:'Noto Serif SC',serif;font-size:1.1rem;margin-bottom:10px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.compare{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="hero-eyebrow">认知革命 · 制度重建 · 消费者主权</div>
+<h1 class="hero-title">人是<em>消费者</em><br>非生产者</h1>
+<p class="hero-sub">从人的本质出发，重建经济学基础——<br>消费价值论 · 人权货币 · 消费税唯一税</p>
+<nav class="hero-nav">
+<a href="#consumer">人是消费者</a>
+<a href="#value">消费价值论</a>
+<a href="#currency">人权货币</a>
+<a href="#tax">消费税制</a>
+<a href="#ai">AI与解放</a>
+</nav>
+</section>
+<section class="section" id="consumer">
+<div class="section-label">第一原理</div>
+<h2 class="section-title">人是<span class="highlight">消费者</span>，非生产者</h2>
+<div class="callout">没有不消费的人。没有人不消费。<br>消费贯穿人从出生到死亡的100%生命周期。</div>
+<p>人从受孕起即开始消费。生产则不同——人可以当工人、农民、程序员，亦可以不当。职业是可选角色，消费是恒定本质。<strong>人当生产者≠人是生产者。</strong></p>
+<div class="compare">
+<div class="compare-header bad">❌ 消耗（生产者专用）</div>
+<div class="compare-header good">✅ 消费（人的专用词）</div>
+<div class="compare-cell bad">机器消耗电力<br>工厂消耗原料<br>AI消耗算力</div>
+<div class="compare-cell good">人消费食物<br>人消费知识<br>人消费服务</div>
+</div>
+<p>生产者是：日月星辰、大地山川、动植物、组织机构、工具机械、自动化装置、AI、人形机器。生产者为消费者服务，不能相反。</p>
+<div class="cards">
+<div class="card"><div class="card-num">学</div><div class="card-title">学生＝消费者</div><div class="card-body">学习是消费精神食粮。活到老学到老，从生到死人人皆是学生，无"当或不当"之说。</div></div>
+<div class="card"><div class="card-num">工</div><div class="card-title">工人＝职业职务</div><div class="card-body">工人、农民、程序员是职业职务，非人本身。人可以选择从事或不从事任何职业。</div></div>
+<div class="card"><div class="card-num">机</div><div class="card-title">人形机器≠机器人</div><div class="card-body">机器人＝像机器的人（屈辱）；人形机器＝像人的机器（工具，为人服务）。</div></div>
+</div>
+</section>
+<section class="section" id="value">
+<div class="section-label">经济学基础</div>
+<h2 class="section-title"><span class="highlight">消费价值论</span><br>即消费者决定论</h2>
+<div class="callout">同样的水：沙漠中每升值数百元；城市自来水每升不足一分。<br>劳动含量相同，价值天壤之别。决定因素只有一个：消费者的需求。</div>
+<p>劳动价值论四大致命缺陷：无法解释钻石与水悖论；忽视消费者主体性；AI时代彻底崩溃（人类劳动时间=0，商品仍有价值）；导致实践灾难（大跃进）。</p>
+<div class="compare">
+<div class="compare-header bad">❌ 劳动价值论（谬误）</div>
+<div class="compare-header good">✅ 消费价值论（真理）</div>
+<div class="compare-cell bad">价值由"社会必要劳动时间"决定<br>生产决定价值<br>人是生产者</div>
+<div class="compare-cell good">价值由消费者需求与判断决定<br>需求决定价值<br>人是消费者</div>
+</div>
+</section>
+<section class="section" id="currency">
+<div class="section-label">制度革命</div>
+<h2 class="section-title"><span class="highlight">钞票选票</span>发行<br>一人一份，人人均等</h2>
+<div class="formula">
+<div><span class="eq">增发总量</span>＝社会消费品零售总额</div>
+<div><span class="eq">人均发行</span>＝增发总量÷总人口</div>
+<div><span class="eq">发放方式</span>＝每人每月均等到账，区块链透明，不可篡改</div>
+<div class="note">※增发与消费总量挂钩，杜绝滥发，根除通胀与通缩。</div>
+</div>
+<div class="cards">
+<div class="card"><div class="card-num">伪</div><div class="card-title">伪市场经济</div><div class="card-body">钞票发行权由权贵掌控——主权货币由央行垄断，加密货币由算力资本垄断。本质相同：发行权不平等。</div></div>
+<div class="card"><div class="card-num">真</div><div class="card-title">真市场经济</div><div class="card-body">钞票选票发行一人一份，人人均等享有。货币是人权，非特权。这是真正的消费者主权。</div></div>
+</div>
+<p>国家是国人的。政府是国人的。央行是国人的。货币是国人的。因此：主权货币发行，一人一份，国人均等享有。世界币发行，一人一份，人人均等享有。</p>
+</section>
+<section class="section" id="tax">
+<div class="section-label">税制重建</div>
+<h2 class="section-title">唯一税率唯一税：<br><span class="highlight">消费税</span></h2>
+<div class="callout">消费税＝消费者纳十一税（1/11）<br>用于：安保、医疗、教育、基建等公共服务全民免费</div>
+<div class="cards">
+<div class="card"><div class="card-num">简</div><div class="card-title">唯一税率</div><div class="card-body">消灭所有复杂税种。一种税，一个税率，人人平等缴纳，无例外，无特权。</div></div>
+<div class="card"><div class="card-num">公</div><div class="card-title">消费者纳税</div><div class="card-body">消费多者多纳税，消费少者少纳税。符合消费价值论逻辑。</div></div>
+<div class="card"><div class="card-num">免</div><div class="card-title">公共服务全免费</div><div class="card-body">税收用于安保、医疗、教育、基建，全民免费享有，不因贫富歧视。</div></div>
+</div>
+</section>
+<section class="section" id="ai">
+<div class="section-label">文明转折</div>
+<h2 class="section-title">AI是<span class="highlight">生产者</span><br>人回归消费者本质</h2>
+<div class="callout">农业革命：人+牲畜生产<br>工业革命：人+机器生产<br>AI革命：AI独立生产——不是辅助，是取代<br><br>人类终于可以回归本质：消费者。</div>
+<p>"不劳者不得食"是人类最深重的枷锁。AI时代，这句话的基础彻底瓦解。真正的解放不是给奴隶发工资，而是废除奴隶身份本身——建立消费者主权制度，让人回归其天然本质。</p>
+<div class="cards">
+<div class="card"><div class="card-num">旧</div><div class="card-title">生产者逻辑（旧文明）</div><div class="card-body">劳动换取生存·不劳者不得食·人是人力资源·劳动价值论·强迫生产</div></div>
+<div class="card"><div class="card-num">新</div><div class="card-title">消费者逻辑（新文明）</div><div class="card-body">消费是天赋权利·人权货币保障消费·人是消费者·消费价值论·自愿生产</div></div>
+</div>
+</section>
+<footer>
+<strong>人是消费者，非生产者</strong>
+消费价值论·人权货币·消费税唯一税·AI解放<br><br>
+这不是乌托邦，这是逻辑的必然结论。
+</footer>
+<script>
+const sections=document.querySelectorAll('.section');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
