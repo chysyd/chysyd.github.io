@@ -51,6 +51,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
 .big-quote{font-family:'Noto Serif SC',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;color:var(--gold-light);text-align:center;padding:40px 24px;line-height:1.6;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:32px 0}
 footer{text-align:center;padding:60px 24px;border-top:1px solid var(--border);color:var(--muted);font-size:.82rem}
 footer strong{color:var(--gold);display:block;font-family:'Noto Serif SC',serif;font-size:1.1rem;margin-bottom:10px}
+.social-links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.social-link{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.9rem;transition:all .25s;background:rgba(255,255,255,.02)}
+.social-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.06)}
+.social-link svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.compare{grid-template-columns:1fr}}
 </style>
@@ -221,6 +225,16 @@ footer strong{color:var(--gold);display:block;font-family:'Noto Serif SC',serif;
 <strong>人是消费者，非生产者</strong>
 消费价值论 · 人权货币 · 消费税唯一税 · AI解放<br><br>
 这不是乌托邦，这是逻辑的必然结论。<br>从第一原理出发，答案只有一个。
+<div class="social-links">
+<a class="social-link" href="https://x.com/chenhongyan63" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+X（推特）@chenhongyan63
+</a>
+<a class="social-link" href="https://b23.tv/rxPIxNL" target="_blank">
+<svg viewBox="0 0 24 24"><path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .355-.124.657-.373.906zM5.333 7.24c-.746.018-1.373.276-1.88.773-.506.498-.769 1.13-.786 1.894v7.52c.017.764.28 1.395.786 1.893.507.498 1.134.756 1.88.773h13.334c.746-.017 1.373-.275 1.88-.773.506-.498.769-1.129.786-1.893v-7.52c-.017-.765-.28-1.396-.786-1.894-.507-.497-1.134-.755-1.88-.773zM8 11.107c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c0-.373.129-.689.386-.947.258-.257.574-.386.947-.386zm8 0c.373 0 .684.124.933.373.25.249.383.569.4.96v1.173c-.017.391-.15.711-.4.96-.249.25-.56.374-.933.374s-.684-.125-.933-.374c-.25-.249-.383-.569-.4-.96V12.44c.017-.391.15-.711.4-.96.249-.249.56-.373.933-.373z"/></svg>
+B站：人是消费者非生产者
+</a>
+</div>
 </footer>
 
 <script>
