@@ -1,144 +1,118 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AI对话录 · 人是消费者非生产者</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #fafaf8;
-            font-family: -apple-system, 'Times New Roman', 'Songti SC', 'Noto Serif SC', 'Georgia', serif;
-            color: #1e1e1c;
-            line-height: 1.55;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .sidebar {
-            width: 260px;
-            padding: 2rem 1.5rem;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 1px solid #e6e4dc;
-        }
-        .site-title {
-            font-size: 1.35rem;
-            font-weight: 500;
-            letter-spacing: -0.2px;
-            margin-bottom: 0.25rem;
-            border-left: 3px solid #b34e4a;
-            padding-left: 0.75rem;
-        }
-        .site-sub {
-            font-size: 0.8rem;
-            color: #6b6a66;
-            margin-bottom: 2rem;
-            padding-left: 1rem;
-            border-left: 3px solid #e0ddd5;
-        }
-        .nav ul { list-style: none; }
-        .nav li { margin-bottom: 0.6rem; }
-        .nav a {
-            text-decoration: none;
-            color: #2c2b28;
-            font-size: 0.95rem;
-            font-weight: 450;
-            transition: 0.2s;
-        }
-        .nav a:hover { color: #b34e4a; transform: translateX(2px); }
-        .nav hr {
-            margin: 1.2rem 0;
-            border: 0;
-            height: 1px;
-            background: #e6e4dc;
-        }
-        .main {
-            flex: 1;
-            padding: 2rem 2.5rem;
-            max-width: calc(100% - 260px);
-        }
-        .page-title {
-            font-size: 1.8rem;
-            font-weight: 500;
-            border-bottom: 2px solid #d6d2c8;
-            padding-bottom: 0.4rem;
-            margin-bottom: 2rem;
-        }
-        .ai-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .ai-item {
-            font-size: 1.18rem;
-            padding: 0.65rem 1rem;
-            background: #ffffff;
-            border: 1px solid #ece7df;
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
-        .ai-item:hover {
-            border-color: #cfc9be;
-            background: #fffdf9;
-        }
-        .ai-item a {
-            text-decoration: none;
-            color: #2a4c7a;
-            font-weight: 470;
-            display: block;
-        }
-        .ai-num {
-            display: inline-block;
-            width: 2rem;
-            color: #8c897e;
-            font-weight: 450;
-        }
-        .footnote {
-            margin-top: 3rem;
-            padding-top: 1rem;
-            font-size: 0.8rem;
-            color: #8c897e;
-            border-top: 1px solid #eae6df;
-        }
-        @media (max-width: 750px) {
-            .sidebar { width: 100%; height: auto; position: relative; border-right: 0; border-bottom: 1px solid #e6e4dc; padding: 1rem 1.5rem; }
-            .main { max-width: 100%; padding: 1.5rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AI对话录 · 人是消费者非生产者</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#12121a;--border:#2a2a3a;--gold:#c8a84b;--gold-light:#e8c86a;--text:#e8e4d8;--muted:#888070}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.8}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.header{text-align:center;padding:60px 20px 30px;border-bottom:1px solid var(--border);margin-bottom:40px}
+.back-home{display:inline-flex;align-items:center;gap:8px;background:rgba(200,168,75,.12);border:1px solid var(--gold);padding:8px 20px;border-radius:40px;color:var(--gold);text-decoration:none;font-size:.85rem;transition:all .2s;margin-bottom:32px}
+.back-home:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.site-title{font-family:'Noto Serif SC',serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:700;color:var(--text);margin-bottom:12px}
+.site-sub{font-size:.9rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.page-title{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:600;color:var(--gold-light);margin:24px 0 16px}
+.ai-list{display:flex;flex-direction:column;gap:20px;margin:40px 0 60px}
+.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;transition:all .2s;scroll-margin-top:80px}
+.ai-card:target{border-color:var(--gold);box-shadow:0 0 0 2px rgba(200,168,75,.3)}
+.ai-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.ai-link{display:flex;align-items:center;gap:18px;padding:20px 24px;text-decoration:none;color:inherit}
+.ai-number{font-size:1.8rem;font-weight:700;color:var(--gold);opacity:.6;min-width:60px;font-family:'Noto Serif SC',serif}
+.ai-info{flex:1}
+.ai-name{font-size:1.25rem;font-weight:600;color:var(--text);margin-bottom:6px}
+.ai-preview{font-size:.85rem;color:var(--muted);line-height:1.5}
+.ai-arrow{font-size:1.2rem;color:var(--gold);opacity:0;transition:opacity .2s}
+.ai-card:hover .ai-arrow{opacity:1}
+.footer-note{text-align:center;padding:32px 0;border-top:1px solid var(--border);margin-top:20px;color:var(--muted);font-size:.8rem}
+.footer-note a{color:var(--gold);text-decoration:none}
+@media (max-width:640px){
+    .ai-link{padding:16px;gap:12px}
+    .ai-number{font-size:1.4rem;min-width:45px}
+    .ai-name{font-size:1rem}
+}
+</style>
 </head>
 <body>
 <div class="container">
-    <aside class="sidebar">
+    <div class="header">
+        <a href="index.html" class="back-home">← 返回主页</a>
         <div class="site-title">人是消费者<br>非生产者</div>
         <div class="site-sub">认知革命 · 制度重建 · 消费者主权</div>
-        <nav class="nav">
-            <ul>
-                <li><a href="#">人是消费者</a></li>
-                <li><a href="#">消费价值论</a></li>
-                <li><a href="#">人权货币</a></li>
-                <li><a href="#">消费税制</a></li>
-                <hr>
-                <li><a href="#">人的困境</a></li>
-                <li><a href="#">现代奴隶制</a></li>
-                <li><a href="#">AI与解放</a></li>
-                <li><a href="#">行动宣言</a></li>
-                <li><a href="dialogues.html" style="color:#b34e4a; font-weight:500;">AI对话录</a></li>
-                <li><a href="#">论文集</a></li>
-            </ul>
-        </nav>
-    </aside>
-    <main class="main">
-        <h1 class="page-title">AI对话录</h1>
-        <div class="ai-list">
-            <div class="ai-item"><a href="claude.html"><span class="ai-num">1.</span> <span class="ai-name">与 Claude 对话</span></a></div>
-            <div class="ai-item"><a href="gemini.html"><span class="ai-num">2.</span> <span class="ai-name">与 Gemini 对话</span></a></div>
-            <div class="ai-item"><a href="grok.html"><span class="ai-num">3.</span> <span class="ai-name">与 Grok 对话</span></a></div>
-            <div class="ai-item"><a href="deepseek.html"><span class="ai-num">4.</span> <span class="ai-name">与 DeepSeek 对话</span></a></div>
-            <div class="ai-item"><a href="doubao.html"><span class="ai-num">5.</span> <span class="ai-name">与 豆包 对话</span></a></div>
-            <div class="ai-item"><a href="chatgpt.html"><span class="ai-num">6.</span
+        <div class="page-title">AI对话录</div>
+        <p style="max-width:600px;margin:0 auto;color:var(--muted);font-size:.9rem">与不同AI的深度思辨 —— 每一场对话都在逼近答案</p>
+    </div>
+
+    <div class="ai-list">
+        <div id="claude" class="ai-card">
+            <a href="claude.html" class="ai-link">
+                <div class="ai-number">1</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 Claude 对话</div>
+                    <div class="ai-preview">消费价值论的底层逻辑 · 人权货币可行性 · AI时代的劳动伦理</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+        <div id="gemini" class="ai-card">
+            <a href="gemini.html" class="ai-link">
+                <div class="ai-number">2</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 Gemini 对话</div>
+                    <div class="ai-preview">人权货币如何对抗通胀 · 消费税制的国际比较</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+        <div id="grok" class="ai-card">
+            <a href="grok.html" class="ai-link">
+                <div class="ai-number">3</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 Grok 对话</div>
+                    <div class="ai-preview">AI全面自动化后的“人的意义” · 存在主义视角下的消费者主权</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+        <div id="deepseek" class="ai-card">
+            <a href="deepseek.html" class="ai-link">
+                <div class="ai-number">4</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 DeepSeek 对话</div>
+                    <div class="ai-preview">消费税累进性设计 · 负税率机制 · 人权货币的发行模型</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+        <div id="doubao" class="ai-card">
+            <a href="doubao.html" class="ai-link">
+                <div class="ai-number">5</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 豆包 对话</div>
+                    <div class="ai-preview">消费者民主 · 从经济主权到政治主权</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+        <div id="chatgpt" class="ai-card">
+            <a href="chatgpt.html" class="ai-link">
+                <div class="ai-number">6</div>
+                <div class="ai-info">
+                    <div class="ai-name">与 ChatGPT 对话</div>
+                    <div class="ai-preview">UBI到人权货币的飞跃 · 全球治理与货币主权</div>
+                </div>
+                <div class="ai-arrow">→</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <p>每一场对话的完整记录，都收录在对应的AI页面中。<br><a href="index.html">← 返回首页</a> &nbsp;|&nbsp; 人是消费者 · 非生产者</p>
+    </div>
+</div>
+</body>
+</html>
