@@ -1,147 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>与Claude对话 · AI对话录</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #fafaf8;
-            font-family: -apple-system, 'Times New Roman', 'Songti SC', 'Noto Serif SC', 'Georgia', serif;
-            color: #1e1e1c;
-            line-height: 1.55;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .sidebar {
-            width: 260px;
-            padding: 2rem 1.5rem;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 1px solid #e6e4dc;
-        }
-        .site-title {
-            font-size: 1.35rem;
-            font-weight: 500;
-            border-left: 3px solid #b34e4a;
-            padding-left: 0.75rem;
-            margin-bottom: 0.25rem;
-        }
-        .site-sub {
-            font-size: 0.8rem;
-            color: #6b6a66;
-            margin-bottom: 2rem;
-            padding-left: 1rem;
-            border-left: 3px solid #e0ddd5;
-        }
-        .nav ul { list-style: none; }
-        .nav li { margin-bottom: 0.6rem; }
-        .nav a {
-            text-decoration: none;
-            color: #2c2b28;
-            font-size: 0.95rem;
-            transition: 0.2s;
-        }
-        .nav a:hover { color: #b34e4a; }
-        .nav hr {
-            margin: 1.2rem 0;
-            border: 0;
-            height: 1px;
-            background: #e6e4dc;
-        }
-        .main {
-            flex: 1;
-            padding: 2rem 2.5rem;
-            max-width: calc(100% - 260px);
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1.2rem;
-            color: #8c897e;
-            text-decoration: none;
-            font-size: 0.85rem;
-        }
-        .back-link:hover { color: #b34e4a; }
-        .page-title {
-            font-size: 1.9rem;
-            font-weight: 500;
-            border-bottom: 2px solid #d6d2c8;
-            padding-bottom: 0.3rem;
-            margin-bottom: 1.5rem;
-        }
-        .dialogue-list { list-style: none; margin-top: 1rem; }
-        .dialogue-list li {
-            margin-bottom: 1rem;
-            padding: 0.6rem 0 0.6rem 0.8rem;
-            border-left: 3px solid transparent;
-            transition: 0.1s;
-        }
-        .dialogue-list li:hover {
-            border-left-color: #b59e7a;
-            background: #fffcf8;
-        }
-        .dialogue-list a {
-            text-decoration: none;
-            font-size: 1.08rem;
-            color: #2a4c7a;
-            display: block;
-        }
-        .dialogue-num {
-            display: inline-block;
-            width: 2rem;
-            font-weight: 500;
-            color: #8c897e;
-        }
-        .footnote {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #8c897e;
-            border-top: 1px solid #eae6df;
-            padding-top: 1rem;
-        }
-        @media (max-width: 750px) {
-            .sidebar { width: 100%; height: auto; position: relative; border-right: 0; border-bottom: 1px solid #e6e4dc; }
-            .main { max-width: 100%; padding: 1.5rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>与Claude对话 · AI对话录</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#12121a;--border:#2a2a3a;--gold:#c8a84b;--gold-light:#e8c86a;--text:#e8e4d8;--muted:#888070}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.8}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.header{text-align:center;padding:40px 20px 30px;border-bottom:1px solid var(--border);margin-bottom:30px}
+.back-links{display:flex;gap:16px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.back-link{background:rgba(200,168,75,.12);border:1px solid var(--gold);padding:6px 16px;border-radius:40px;color:var(--gold);text-decoration:none;font-size:.8rem;transition:all .2s}
+.back-link:hover{background:var(--gold);color:var(--bg)}
+.site-title{font-family:'Noto Serif SC',serif;font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.page-title{font-size:1.8rem;font-weight:600;color:var(--gold-light);margin:16px 0 8px}
+.dialogue-list{list-style:none;margin:40px 0}
+.dialogue-list li{margin-bottom:20px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.dialogue-list li:hover{border-color:var(--gold);transform:translateX(4px)}
+.dialogue-list a{text-decoration:none;color:inherit;display:flex;align-items:flex-start;gap:16px}
+.dialogue-num{font-size:1.2rem;font-weight:700;color:var(--gold);min-width:40px}
+.dialogue-title{font-size:1.05rem;font-weight:500;color:var(--text);flex:1}
+.dialogue-date{font-size:.75rem;color:var(--muted);margin-top:4px}
+.footer-note{text-align:center;padding:32px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem}
+.footer-note a{color:var(--gold);text-decoration:none}
+</style>
 </head>
 <body>
 <div class="container">
-    <aside class="sidebar">
-        <div class="site-title">人是消费者<br>非生产者</div>
-        <div class="site-sub">认知革命 · 制度重建 · 消费者主权</div>
-        <nav class="nav">
-            <ul>
-                <li><a href="#">人是消费者</a></li>
-                <li><a href="#">消费价值论</a></li>
-                <li><a href="#">人权货币</a></li>
-                <li><a href="#">消费税制</a></li>
-                <hr>
-                <li><a href="#">人的困境</a></li>
-                <li><a href="#">现代奴隶制</a></li>
-                <li><a href="#">AI与解放</a></li>
-                <li><a href="#">行动宣言</a></li>
-                <li><a href="dialogues.html" style="color:#b34e4a;">AI对话录</a></li>
-                <li><a href="#">论文集</a></li>
-            </ul>
-        </nav>
-    </aside>
-    <main class="main">
-        <a href="dialogues.html" class="back-link">← 返回 AI对话录总目录</a>
-        <h1 class="page-title">与 Claude 对话</h1>
-        <ul class="dialogue-list">
-            <li><a href="claude-1.html"><span class="dialogue-num">1.</span> <span class="dialogue-title">消费价值论的底层逻辑：从劳动价值到使用价值</span></a></li>
-            <li><a href="claude-2.html"><span class="dialogue-num">2.</span> <span class="dialogue-title">人权货币 vs 国家信用货币：制度可行性对话</span></a></li>
-            <li><a href="claude-3.html"><span class="dialogue-num">3.</span> <span class="dialogue-title">AI时代「人非生产者」的伦理与技术路径</span></a></li>
-            <li><a href="claude-4.html"><span class="dialogue-num">4.</span> <span class="dialogue-title">消费税单一税制如何避免累退性 —— Claude 的反驳与共识</span></a></li>
-        </ul>
-        <div class="footnote">※ 点击标题进入完整对话记录（可继续补充）</div>
-    
+    <div class="header">
+        <div class="back-links">
+            <a href="index.html" class="back-link">← 返回主页</a>
+            <a href="dialogues.html" class="back-link">📚 返回AI对话录总目录</a>
+        </div>
+        <div class="site-title">人是消费者 非生产者</div>
+        <div class="page-title">与 Claude 对话</div>
+        <p style="color:var(--muted);font-size:.9rem">深入探讨消费价值论、人权货币、AI解放的核心议题</p>
+    </div>
+
+    <ul class="dialogue-list">
+        <li><a href="claude-1.html"><span class="dialogue-num">1.</span><div><div class="dialogue-title">消费价值论的底层逻辑：从劳动价值到使用价值</div><div class="dialogue-date">2026年5月 · 核心概念交锋</div></div></a></li>
+        <li><a href="claude-2.html"><span class="dialogue-num">2.</span><div><div class="dialogue-title">人权货币 vs 国家信用货币：制度可行性对话</div><div class="dialogue-date">2026年5月 · 货币主权</div></div></a></li>
+        <li><a href="claude-3.html"><span class="dialogue-num">3.</span><div><div class="dialogue-title">AI时代「人非生产者」的伦理与技术路径</div><div class="dialogue-date">2026年5月 · 解放与意义</div></div></a></li>
+        <li><a href="claude-4.html"><span class="dialogue-num">4.</span><div><div class="dialogue-title">消费税单一税制如何避免累退性 —— Claude 的反驳与共识</div><div class="dialogue-date">2026年5月 · 税制设计</div></div></a></li>
+    </ul>
+
+    <div class="footer-note">
+        ※ 点击条目进入完整对话记录 | <a href="dialogues.html">返回总目录</a>
+    </div>
+</div>
+</body>
+</html>
