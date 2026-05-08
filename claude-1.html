@@ -1,1 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消费价值论的底层逻辑 · 与Claude对话</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #fafaf8;
+            font-family: -apple-system, 'Times New Roman', 'Songti SC', 'Noto Serif SC', 'Georgia', serif;
+            color: #1e1e1c;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .sidebar {
+            width: 260px;
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid #e6e4dc;
+        }
+        .site-title {
+            font-size: 1.35rem;
+            font-weight: 500;
+            border-left: 3px solid #b34e4a;
+            padding-left: 0.75rem;
+            margin-bottom: 0.25rem;
+        }
+        .site-sub {
+            font-size: 0.8rem;
+            color: #6b6a66;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 3px solid #e0ddd5;
+        }
+        .nav ul { list-style: none; }
+        .nav li { margin-bottom: 0.6rem; }
+        .nav a {
+            text-decoration: none;
+            color: #2c2b28;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+        .nav a:hover { color: #b34e4a; }
+        .nav hr {
+            margin: 1.2rem 0;
+            border: 0;
+            height: 1px;
+            background: #e6e4dc;
+        }
+        .main {
+            flex: 1;
+            padding: 2rem 2.5rem;
+            max-width: calc(100% - 260px);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #8c897e;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .back-link:hover { color: #b34e4a; }
+        .dialogue-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            border-bottom: 2px solid #d6d2c8;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1.2rem;
+        }
+        .dialogue-meta {
+            color: #8c897e;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            border-left: 3px solid #e0ddd5;
+            padding-left: 1rem;
+        }
+        .exchange {
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .speaker {
+            font-weight: 600;
+            color: #b34e4a;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        .speaker.user {
+            color: #2a6f5c;
+        }
+        .message {
+            background: #ffffff;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            border: 1px solid #ece7df;
+            line-height: 1.6;
+        }
+        .message p {
+            margin-bottom: 0.6rem;
+        }
+        .message p:last-child {
+            margin-bottom: 0;
+        }
+        hr.divider {
+            margin: 1.8rem 0;
+            border: 0;
+            height: 1px;
+            background: #eae6df;
+        }
+        @media (max-width: 750px) {
+            .sidebar { width: 100%; height: auto; position: relative; border-right: 0; border-bottom: 1px solid #e6e4dc; }
+            .main { max-width: 100%; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="site-title">人是消费者<br>非生产者</div>
+        <div class="site-sub">认知革命 · 制度重建 · 消费者主权</div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">人是消费者</a></li>
+                <li><a href="#">消费价值论</a></li>
+                <li><a href="#">人权货币</a></li>
+                <li><a href="#">消费税制</a></li>
+                <hr>
+                <li><a href="#">人的困境</a></li>
+                <li><a href="#">现代奴隶制</a></li>
+                <li><a href="#">AI与解放</a></li>
+                <li><a href="#">行动宣言</a></li>
+                <li><a href="dialogues.html">AI对话录</a></li>
+                <li><a href="#">论文集</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main">
+        <a href="claude.html" class="back-link">← 返回 与Claude对话列表</a>
+        <h1 class="dialogue-title">1. 消费价值论的底层逻辑：从劳动价值到使用价值</h1>
+        <div class="dialogue-meta">对话时间：2026年5月 · 与 Claude 3.5 Sonnet</div>
 
+        <div class="exchange">
+            <div class="speaker user">👤 我：</div>
+            <div class="message">
+                <p>消费价值论的核心说“人是消费者而非生产者”，但主流经济学一直强调生产创造价值。你怎么看这个根本分歧？</p>
+            </div>
+        </div>
+
+        <div class="exchange">
+            <div class="speaker">🤖 Claude：</div>
+            <div class="message">
+                <p>这是一个非常好的起点。主流经济学从斯密、李嘉图到马克思，确实都锚定在<strong>劳动价值论</strong>或生产要素论上——“价值由生产决定”。而消费价值论翻转了视角：<st
