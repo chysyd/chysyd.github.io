@@ -172,8 +172,14 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
     <button id="readAloudBtn" style="background:rgba(200,168,75,.2); border:1px solid #c8a84b; color:#c8a84b; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读本页对话</button>
     <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid #2a2a3a; color:#888070; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:12px;">⏹️ 停止</button>
 </div>
+<!-- 语音朗读功能 - 移动端优化版 -->
+<div style="text-align:center; margin: 20px 0;">
+    <button id="readAloudBtn" style="background:rgba(200,168,75,.2); border:1px solid #c8a84b; color:#c8a84b; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读本页对话</button>
+    <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid #2a2a3a; color:#888070; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:12px;">⏹️ 停止</button>
+</div>
 <script>
 (function() {
+    // 移动端优化：确保用户点击后能播放
     const readBtn = document.getElementById('readAloudBtn');
     const stopBtn = document.getElementById('stopBtn');
     if (!readBtn || !stopBtn) return;
@@ -181,8 +187,16 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
     let utterance = null;
     let currentIndex = 0;
     let exchanges = [];
+    let isSpeaking = false;
 
-    // 获取所有对话块（class="exchange"）
+    // 预初始化语音引擎（移动端需要）
+    function initSpeech() {
+        // 空调用，激活语音引擎
+        window.speechSynthesis.getVoices();
+        // 某些安卓需要延迟
+    }
+    initSpeech();
+
     function collectExchanges() {
         const exchangeDivs = document.querySelectorAll('.exchange');
         const items = [];
@@ -190,8 +204,6 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
             const speakerDiv = div.querySelector('.speaker');
             const messageDiv = div.querySelector('.message');
             if (!speakerDiv || !messageDiv) return;
-
-            // 识别说话人
             let speakerName = '';
             const speakerClass = speakerDiv.className;
             if (speakerClass.includes('user')) speakerName = '我说';
@@ -202,7 +214,6 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
             else if (speakerClass.includes('doubao')) speakerName = '豆包';
             else if (speakerClass.includes('chatgpt')) speakerName = 'ChatGPT';
             else speakerName = speakerDiv.innerText.trim().replace(/[🤖👤]/g, '').trim() || 'AI';
-
             const text = messageDiv.innerText.trim();
             if (text) items.push({ speaker: speakerName, content: text });
         });
@@ -211,6 +222,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
 
     function speakNext() {
         if (currentIndex >= exchanges.length) {
+            isSpeaking = false;
             utterance = null;
             return;
         }
@@ -219,34 +231,53 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
         utterance = new SpeechSynthesisUtterance(fullText);
         utterance.lang = 'zh-CN';
         utterance.rate = 0.9;
+        // 移动端关键：必须设置 pitch 和 volume
+        utterance.pitch = 1.0;
+        utterance.volume = 1;
         utterance.onend = function() {
             currentIndex++;
             speakNext();
         };
         utterance.onerror = function(e) {
-            console.warn('朗读错误', e);
-            currentIndex++;
-            speakNext();
+            console.warn('朗读错误:', e);
+            // 移动端可能会因为引擎未就绪而报错，尝试重试一次
+            if (e.error === 'not-allowed') {
+                setTimeout(() => {
+                    if (currentIndex < exchanges.length) speakNext();
+                }, 100);
+            } else {
+                currentIndex++;
+                speakNext();
+            }
         };
         window.speechSynthesis.speak(utterance);
+        isSpeaking = true;
     }
 
     readBtn.addEventListener('click', () => {
-        // 停止当前朗读
-        if (utterance) window.speechSynthesis.cancel();
+        // 先停止当前
+        if (utterance) {
+            window.speechSynthesis.cancel();
+            utterance = null;
+        }
+        // 重新收集对话
         exchanges = collectExchanges();
         if (exchanges.length === 0) {
-            alert('没有找到可朗读的对话内容，请确保页面中有 class="exchange" 的对话块。');
+            alert('没有找到可朗读的对话内容，请确认页面中有 class="exchange" 的对话块。');
             return;
         }
         currentIndex = 0;
-        speakNext();
+        // 延迟一点确保停止生效
+        setTimeout(() => {
+            speakNext();
+        }, 50);
     });
 
     stopBtn.addEventListener('click', () => {
         if (utterance) {
             window.speechSynthesis.cancel();
             utterance = null;
+            isSpeaking = false;
             currentIndex = 0;
         }
     });
