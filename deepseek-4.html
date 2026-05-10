@@ -167,12 +167,90 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
         <a href="deepseek.html">📚 返回DeepSeek对话列表</a>
     </div>
 </div>
-  <!-- 朗读按钮 -->
+  <!-- 语音朗读功能 - 内嵌版 -->
 <div style="text-align:center; margin: 20px 0;">
-    <button id="readAloudBtn" style="background:rgba(200,168,75,.2); border:1px solid var(--gold); color:var(--gold); padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读本页对话</button>
-    <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid var(--border); color:var(--muted); padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:12px;">⏹️ 停止</button>
+    <button id="readAloudBtn" style="background:rgba(200,168,75,.2); border:1px solid #c8a84b; color:#c8a84b; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读本页对话</button>
+    <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid #2a2a3a; color:#888070; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:12px;">⏹️ 停止</button>
 </div>
+<script>
+(function() {
+    const readBtn = document.getElementById('readAloudBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    if (!readBtn || !stopBtn) return;
 
-<script src="read-aloud.js"></script>  
+    let utterance = null;
+    let currentIndex = 0;
+    let exchanges = [];
+
+    // 获取所有对话块（class="exchange"）
+    function collectExchanges() {
+        const exchangeDivs = document.querySelectorAll('.exchange');
+        const items = [];
+        exchangeDivs.forEach(div => {
+            const speakerDiv = div.querySelector('.speaker');
+            const messageDiv = div.querySelector('.message');
+            if (!speakerDiv || !messageDiv) return;
+
+            // 识别说话人
+            let speakerName = '';
+            const speakerClass = speakerDiv.className;
+            if (speakerClass.includes('user')) speakerName = '我说';
+            else if (speakerClass.includes('deepseek')) speakerName = 'DeepSeek';
+            else if (speakerClass.includes('claude')) speakerName = 'Claude';
+            else if (speakerClass.includes('gemini')) speakerName = 'Gemini';
+            else if (speakerClass.includes('grok')) speakerName = 'Grok';
+            else if (speakerClass.includes('doubao')) speakerName = '豆包';
+            else if (speakerClass.includes('chatgpt')) speakerName = 'ChatGPT';
+            else speakerName = speakerDiv.innerText.trim().replace(/[🤖👤]/g, '').trim() || 'AI';
+
+            const text = messageDiv.innerText.trim();
+            if (text) items.push({ speaker: speakerName, content: text });
+        });
+        return items;
+    }
+
+    function speakNext() {
+        if (currentIndex >= exchanges.length) {
+            utterance = null;
+            return;
+        }
+        const item = exchanges[currentIndex];
+        const fullText = `${item.speaker}：${item.content}`;
+        utterance = new SpeechSynthesisUtterance(fullText);
+        utterance.lang = 'zh-CN';
+        utterance.rate = 0.9;
+        utterance.onend = function() {
+            currentIndex++;
+            speakNext();
+        };
+        utterance.onerror = function(e) {
+            console.warn('朗读错误', e);
+            currentIndex++;
+            speakNext();
+        };
+        window.speechSynthesis.speak(utterance);
+    }
+
+    readBtn.addEventListener('click', () => {
+        // 停止当前朗读
+        if (utterance) window.speechSynthesis.cancel();
+        exchanges = collectExchanges();
+        if (exchanges.length === 0) {
+            alert('没有找到可朗读的对话内容，请确保页面中有 class="exchange" 的对话块。');
+            return;
+        }
+        currentIndex = 0;
+        speakNext();
+    });
+
+    stopBtn.addEventListener('click', () => {
+        if (utterance) {
+            window.speechSynthesis.cancel();
+            utterance = null;
+            currentIndex = 0;
+        }
+    });
+})();
+</script>
 </body>
 </html>
