@@ -168,31 +168,27 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
     </div>
 </div>
   
-<!-- 语音朗读功能 - 移动端优化版 -->
+<!-- 朗读功能：优化按钮布局 + 语音选择 + 移动端兼容 -->
 <div style="text-align:center; margin: 20px 0;">
-    <button id="readAloudBtn" style="background:rgba(200,168,75,.2); border:1px solid #c8a84b; color:#c8a84b; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读本页对话</button>
-    <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid #2a2a3a; color:#888070; padding:8px 20px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:12px;">⏹️ 停止</button>
+    <button id="readBtn" style="background:rgba(200,168,75,.2); border:1px solid #c8a84b; color:#c8a84b; padding:8px 18px; border-radius:40px; cursor:pointer; font-size:0.9rem;">🔊 朗读</button>
+    <button id="stopBtn" style="background:rgba(200,168,75,.1); border:1px solid #2a2a3a; color:#888070; padding:8px 18px; border-radius:40px; cursor:pointer; font-size:0.9rem; margin-left:10px;">⏹️ 停止</button>
+    <span style="margin-left:12px; font-size:0.75rem;">
+        <select id="voiceSelect" style="background:#1e1e2a; color:#c8c0b0; border:1px solid #2a2a3a; border-radius:20px; padding:4px 8px;"></select>
+    </span>
 </div>
 <script>
 (function() {
-    // 移动端优化：确保用户点击后能播放
-    const readBtn = document.getElementById('readAloudBtn');
+    const readBtn = document.getElementById('readBtn');
     const stopBtn = document.getElementById('stopBtn');
+    const voiceSelect = document.getElementById('voiceSelect');
     if (!readBtn || !stopBtn) return;
 
     let utterance = null;
     let currentIndex = 0;
     let exchanges = [];
-    let isSpeaking = false;
+    let availableVoices = [];
 
-    // 预初始化语音引擎（移动端需要）
-    function initSpeech() {
-        // 空调用，激活语音引擎
-        window.speechSynthesis.getVoices();
-        // 某些安卓需要延迟
-    }
-    initSpeech();
-
+    // 获取页面中的对话内容
     function collectExchanges() {
         const exchangeDivs = document.querySelectorAll('.exchange');
         const items = [];
@@ -216,9 +212,33 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
         return items;
     }
 
+    // 填充可选语音列表
+    function loadVoices() {
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices.length) return;
+        // 筛选中文语音
+        const chineseVoices = voices.filter(v => v.lang.startsWith('zh'));
+        const allVoices = chineseVoices.length ? chineseVoices : voices;
+        availableVoices = allVoices;
+        voiceSelect.innerHTML = '';
+        allVoices.forEach((voice, idx) => {
+            const option = document.createElement('option');
+            option.value = idx;
+            option.textContent = `${voice.name} (${voice.lang})`;
+            // 优先选择女声或者 Google 语音
+            if (voice.name.includes('Google') || voice.name.includes('Ting') || voice.name.includes('女')) {
+                option.selected = true;
+            }
+            voiceSelect.appendChild(option);
+        });
+    }
+
+    // 初始加载语音列表（某些浏览器需要延迟）
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices();
+
     function speakNext() {
         if (currentIndex >= exchanges.length) {
-            isSpeaking = false;
             utterance = null;
             return;
         }
@@ -227,53 +247,51 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans SC',sans-seri
         utterance = new SpeechSynthesisUtterance(fullText);
         utterance.lang = 'zh-CN';
         utterance.rate = 0.9;
-        // 移动端关键：必须设置 pitch 和 volume
         utterance.pitch = 1.0;
         utterance.volume = 1;
-        utterance.onend = function() {
+
+        // 选择用户指定的语音
+        const selectedIdx = parseInt(voiceSelect.value, 10);
+        if (!isNaN(selectedIdx) && availableVoices[selectedIdx]) {
+            utterance.voice = availableVoices[selectedIdx];
+        }
+
+        utterance.onend = () => {
             currentIndex++;
             speakNext();
         };
-        utterance.onerror = function(e) {
-            console.warn('朗读错误:', e);
-            // 移动端可能会因为引擎未就绪而报错，尝试重试一次
-            if (e.error === 'not-allowed') {
-                setTimeout(() => {
-                    if (currentIndex < exchanges.length) speakNext();
-                }, 100);
-            } else {
-                currentIndex++;
-                speakNext();
-            }
+        utterance.onerror = (e) => {
+            console.warn('朗读出错:', e);
+            currentIndex++;
+            speakNext();
         };
         window.speechSynthesis.speak(utterance);
-        isSpeaking = true;
     }
 
     readBtn.addEventListener('click', () => {
-        // 先停止当前
+        // 停止当前
         if (utterance) {
             window.speechSynthesis.cancel();
             utterance = null;
         }
-        // 重新收集对话
         exchanges = collectExchanges();
         if (exchanges.length === 0) {
-            alert('没有找到可朗读的对话内容，请确认页面中有 class="exchange" 的对话块。');
+            alert('未找到可朗读的对话内容');
             return;
         }
         currentIndex = 0;
-        // 延迟一点确保停止生效
-        setTimeout(() => {
-            speakNext();
-        }, 50);
+        // 确保语音列表已加载
+        if (window.speechSynthesis.getVoices().length === 0) {
+            window.speechSynthesis.onvoiceschanged = () => setTimeout(() => speakNext(), 50);
+        } else {
+            setTimeout(() => speakNext(), 50);
+        }
     });
 
     stopBtn.addEventListener('click', () => {
         if (utterance) {
             window.speechSynthesis.cancel();
             utterance = null;
-            isSpeaking = false;
             currentIndex = 0;
         }
     });
