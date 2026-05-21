@@ -1,1 +1,1239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>主权（皇权）货币发行＝权贵资本</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --red-seal: #8b1a1a;
+    --mid: #5c4a2a;
+    --light-ink: #7a6a50;
+    --border: #c8b896;
+    --accent-bg: #ede5d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif SC', serif;
+    line-height: 1.9;
+    font-size: 16px;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* HEADER */
+  .masthead {
+    border-bottom: 3px double var(--gold);
+    padding: 2rem 0 0;
+    background: linear-gradient(180deg, #e8dfc8 0%, var(--paper) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead::before {
+    content: '￥ $ € ₿ ¥ £ ₩';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    font-size: 80px;
+    color: rgba(184,134,11,0.06);
+    letter-spacing: 20px;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .masthead-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+    position: relative;
+  }
+
+  .pub-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--light-ink);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .seal {
+    width: 52px;
+    height: 52px;
+    border: 2px solid var(--red-seal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red-seal);
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.3;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .title-block {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .title-eyebrow {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  h1.main-title {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  h1.main-title span.highlight {
+    color: var(--red-seal);
+    font-style: italic;
+  }
+
+  .subtitle {
+    margin-top: 1rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px;
+    color: var(--light-ink);
+    letter-spacing: 0.1em;
+  }
+
+  .divider-ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 0.5em;
+    margin: 1.2rem 0;
+  }
+
+  /* META BAR */
+  .meta-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.6rem 0;
+  }
+
+  .meta-bar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+
+  .meta-bar span { opacity: 0.7; }
+  .meta-bar strong { color: var(--gold-light); opacity: 1; font-weight: 500; }
+
+  /* ABSTRACT BOX */
+  .abstract-box {
+    max-width: 860px;
+    margin: 2.5rem auto 0;
+    padding: 0 2rem;
+  }
+
+  .abstract-inner {
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    background: var(--accent-bg);
+    padding: 1.5rem 2rem;
+  }
+
+  .abstract-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .abstract-text {
+    font-size: 14.5px;
+    color: var(--mid);
+    line-height: 1.85;
+  }
+
+  .keywords {
+    margin-top: 1rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 12px;
+    color: var(--light-ink);
+  }
+
+  .keywords strong { color: var(--ink); }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  /* Chapter heading */
+  .chapter {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
+    position: relative;
+  }
+
+  .chapter-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 900;
+    color: rgba(184,134,11,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    pointer-events: none;
+  }
+
+  .chapter-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  h2.chapter-title {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* Section heading */
+  h3.section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+  }
+
+  /* Sub-section */
+  h4.sub-title {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--mid);
+    margin: 1.8rem 0 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+    font-size: 15.5px;
+    color: var(--ink);
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    margin: 2.5rem 0;
+    padding: 1.5rem 2rem;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent-bg) 0%, var(--paper) 100%);
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--red-seal);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--light-ink);
+    font-style: normal;
+  }
+
+  /* Tables */
+  .table-wrap {
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  thead th {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  tbody tr:nth-child(odd) { background: var(--accent-bg); }
+  tbody tr:nth-child(even) { background: var(--paper); }
+
+  tbody td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--mid);
+    vertical-align: top;
+  }
+
+  tbody td:first-child { color: var(--ink); font-weight: 500; }
+
+  /* Highlight box */
+  .highlight-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    position: relative;
+  }
+
+  .highlight-box::before {
+    content: '▌';
+    position: absolute;
+    left: 0.6rem;
+    top: 1.5rem;
+    color: var(--gold);
+    font-size: 20px;
+  }
+
+  .highlight-box p {
+    color: var(--paper);
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .highlight-box strong { color: var(--gold-light); }
+
+  /* Logic chain */
+  .logic-chain {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13.5px;
+    line-height: 2;
+    color: var(--mid);
+  }
+
+  .logic-chain .arrow {
+    color: var(--gold);
+    font-size: 16px;
+    margin: 0 0.3rem;
+  }
+
+  .logic-chain .step {
+    display: block;
+    padding: 0.1rem 0;
+  }
+
+  .logic-chain .step.key {
+    color: var(--red-seal);
+    font-weight: 500;
+  }
+
+  /* Key term */
+  strong.term {
+    color: var(--red-seal);
+    font-weight: 700;
+  }
+
+  em.concept {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* Blockquote */
+  blockquote {
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--gold);
+    background: var(--accent-bg);
+    font-style: italic;
+    color: var(--mid);
+    font-size: 15px;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 12px;
+    font-style: normal;
+    color: var(--light-ink);
+    letter-spacing: 0.1em;
+  }
+
+  /* Conclusion */
+  .conclusion {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem;
+    margin: 4rem -2rem -5rem;
+  }
+
+  .conclusion h2 {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .conclusion p {
+    color: rgba(245,240,232,0.85);
+    max-width: 700px;
+    margin: 0 auto 1.2rem;
+  }
+
+  .conclusion .logic-chain {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(184,134,11,0.4);
+    max-width: 600px;
+    margin: 2rem auto;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .conclusion .logic-chain .step.key { color: var(--gold-light); }
+
+  .final-quote {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(184,134,11,0.4);
+  }
+
+  .final-quote p {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0.5rem auto;
+  }
+
+  .timestamp {
+    text-align: center;
+    margin-top: 2rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(245,240,232,0.35);
+  }
+
+  /* Section divider */
+  .section-divider {
+    text-align: center;
+    color: var(--border);
+    font-size: 20px;
+    letter-spacing: 0.8em;
+    margin: 3rem 0;
+  }
+
+  /* Numbered list */
+  ol.styled {
+    padding-left: 1.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  ol.styled li {
+    margin-bottom: 0.8rem;
+    font-size: 15px;
+    color: var(--ink);
+    padding-left: 0.5rem;
+  }
+
+  ol.styled li::marker {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Case study box */
+  .case-box {
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+    overflow: hidden;
+  }
+
+  .case-box-header {
+    background: var(--mid);
+    color: var(--paper);
+    padding: 0.6rem 1.2rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .case-box-body {
+    padding: 1.2rem 1.5rem;
+    background: var(--accent-bg);
+  }
+
+  .case-box-body p {
+    font-size: 14.5px;
+    margin-bottom: 0.8rem;
+  }
+
+  .case-box-body p:last-child { margin-bottom: 0; }
+
+  /* Data highlight */
+  .data-point {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 0.1rem 0.5rem;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .toc-label {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .toc ol {
+    padding-left: 1.2rem;
+    column-count: 2;
+    column-gap: 2rem;
+  }
+
+  .toc li {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .toc ol { column-count: 1; }
+    .chapter-number { display: none; }
+    .conclusion { margin: 4rem -2rem -5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="pub-line">
+      <span>消费者主权论丛</span>
+      <div class="seal">消费<br>主权<br>宣言</div>
+      <span>时间戳：2026-05-21</span>
+    </div>
+    <div class="title-block">
+      <div class="title-eyebrow">政治经济学批判 · 货币制度论</div>
+      <h1 class="main-title">
+        主权（皇权）货币发行<br>
+        <span class="highlight">＝ 权贵资本</span>
+      </h1>
+      <div class="divider-ornament">◆ ◇ ◆</div>
+      <p class="subtitle">从铸币铸权到央行印钞，五千年货币劫掠史的逻辑解剖</p>
+    </div>
+  </div>
+</header>
+
+<div class="meta-bar">
+  <div class="meta-bar-inner">
+    <span>核心命题：</span>
+    <strong>主权货币＝皇权货币＝权贵资本永动机</strong>
+    <span>|</span>
+    <strong>解：钞票选票一人一份，人人均等享有</strong>
+  </div>
+</div>
+
+<!-- ABSTRACT -->
+<div class="abstract-box">
+  <div class="abstract-inner">
+    <div class="abstract-label">摘要 Abstract</div>
+    <p class="abstract-text">
+      货币，是人即消费者判断商品服务价值的凭据。钞票，是消费者行使消费主权的选票。然而，人类有史以来，货币发行权从未属于消费者。从古代帝王铸币，到现代央行印钞，到区块链数字加密货币——发行权始终掌握在权贵手中。本文以事实为起点，以字词精准定义为基础，以逻辑推理为工具，论证核心命题：<strong>主权货币发行＝皇权货币发行＝权贵资本积累的永动机</strong>。无论历史形态如何演变，货币发行权的垄断，始终是一切剥削的总根源、一切权贵资本的发动机、一切现代奴隶制的制度基础。唯一的解：<strong>钞票选票发行一人一份，人人均等享有。</strong>
+    </p>
+    <p class="keywords">
+      <strong>关键词：</strong>主权货币 · 皇权货币 · 权贵资本 · 消费者主权 · 钞票选票论 · 人权货币 · 货币发行权 · 通货膨胀 · 铸币税 · 现代奴隶制
+    </p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-label">目录 Contents</div>
+    <ol>
+      <li>定义——词义精准是逻辑的地基</li>
+      <li>历史溯源——皇权货币的五千年</li>
+      <li>现代主权货币体系的运作机制</li>
+      <li>区块链数字加密货币——新皮囊，旧皇权</li>
+      <li>货币发行权不平等——权贵资本积累的数学证明</li>
+      <li>国家主义与资本主义——两种皇权货币的同质性</li>
+      <li>货币主权的哲学批判</li>
+      <li>真实市场经济的货币条件</li>
+      <li>制度设计——人权货币的具体蓝图</li>
+      <li>反驳批评与澄清误解</li>
+      <li>当下——主权货币体系的临界点</li>
+    </ol>
+  </div>
+
+  <!-- CHAPTER 1 -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-number">一</div>
+    <div class="chapter-label">第一章</div>
+    <h2 class="chapter-title">定义——词义精准是逻辑的地基</h2>
+  </div>
+
+  <h3 class="section-title">1.1 货币的精确定义</h3>
+  <p><strong class="term">货币：人即消费者判断商品服务价值的凭据。</strong></p>
+  <p>不是更多，不是更少。拆解这个定义：</p>
+  <ol class="styled">
+    <li><strong>人即消费者</strong>——货币的持有主体，是消费者，不是生产者。生产者消耗原材料，消费者消费商品服务。货币属于消费者的判断工具。</li>
+    <li><strong>判断</strong>——货币不创造价值，货币表达判断。消费者用货币"投票"，选择哪种商品服务值得存在，哪种不值得。这就是米塞斯所说：钞票每一分都是选票。</li>
+    <li><strong>商品服务价值的凭据</strong>——价值不在生产端（劳动价值论的谬误），在消费端。消费者愿意用多少货币换取，决定了商品服务的价值。</li>
+  </ol>
+
+  <div class="highlight-box">
+    <p><strong>因此：货币制度的设计，必须以消费者为中心。</strong><br>
+    任何背离消费者中心的货币制度，都是对消费者主权的劫持。</p>
+  </div>
+
+  <h3 class="section-title">1.2 主权货币的精确定义</h3>
+  <p><strong class="term">主权货币（Sovereign Currency）：由国家（政府/央行）垄断发行的法定货币。</strong></p>
+  <p>"主权"二字，看似神圣，实则暗藏玄机。</p>
+
+  <div class="pull-quote">
+    <p>主权是谁的主权？<br>
+    名义上：国家主权，人民共和国，人民的主权。<br>
+    实质上：政府官僚的主权，央行技术官僚的主权，背后权贵集团的主权。</p>
+  </div>
+
+  <p>人民共和国的人民，拿到了货币发行权吗？人民银行的人民，参与了货币发行决策吗？人民币的人民，人人均等享有了增发红利吗？答案三个"否"。</p>
+  <p><strong class="term">因此：主权货币，名为人民主权，实为权贵皇权。主权货币＝皇权货币。</strong></p>
+
+  <h3 class="section-title">1.3 权贵资本的精确定义</h3>
+  <p><strong class="term">权贵资本（Privileged Capital）：通过垄断权力（政治权力、货币发行权、立法权）而非消费者选票积累的资本。</strong></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>资本类型</th>
+          <th>积累方式</th>
+          <th>合法性基础</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>消费者选票资本</td>
+          <td>消费者自愿用钞票选票投票支持</td>
+          <td>消费者主权</td>
+        </tr>
+        <tr>
+          <td>权贵资本</td>
+          <td>垄断货币发行权，先于消费者获得新增货币</td>
+          <td>权力强制</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>权贵资本的本质：在消费者投票之前，劫持投票权本身。</strong></p>
+  </div>
+
+  <!-- CHAPTER 2 -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-number">二</div>
+    <div class="chapter-label">第二章</div>
+    <h2 class="chapter-title">历史溯源——皇权货币的五千年</h2>
+  </div>
+
+  <h3 class="section-title">2.1 铸币即皇权——古代货币的本质</h3>
+  <p>人类最早的货币，是天然物：贝壳、盐、布帛、金属块。这些天然货币有一个共同特征：<em class="concept">发行权分散，无人垄断。</em></p>
+  <p>贝壳是海边的人采集的。盐是盐田的人晒制的。金属块是矿工挖掘的。没有人能垄断发行。因此，这是历史上最接近消费者主权货币的形态。</p>
+  <p>约公元前7世纪，吕底亚王国开始铸造标准化金币。关键变化：国王在金币上盖章，宣示"这枚金币含金量由我保证"。这一盖章，意味深长——<strong class="term">铸币税（Seigniorage）</strong>就此诞生：面值与金属成本之差，归国王所有。</p>
+
+  <div class="highlight-box">
+    <p>面值1两黄金的铜币，实际含金0.8两，0.2两的差价是国王的收入。这0.2两，从何而来？<strong>从全体消费者的购买力稀释而来。这不是劳动所得，是权力所得。这是权贵资本的第一种形态。</strong></p>
+  </div>
+
+  <h3 class="section-title">2.2 中国历史：皇权货币的极致案例</h3>
+
+  <div class="case-box">
+    <div class="case-box-header">案例一 · 汉武帝的五铢钱垄断（公元前118年）</div>
+    <div class="case-box-body">
+      <p>汉武帝北击匈奴，军费耗尽国库，遂收回私人铸币权，国家垄断，发行皮币，大量减重铸币获取铸币税。</p>
+      <p><strong>效果：国库充盈，民间通胀，财富从消费者流向国家（权贵）。</strong></p>
+      <p>这就是主权货币的运作逻辑：战争需要钱→印钱→通胀→消费者承担。消费者是被动的买单者，始终如此。</p>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-box-header">案例二 · 北宋交子——世界最早纸币的真相</div>
+    <div class="case-box-body">
+      <p>教科书说北宋交子是人类文明进步的标志。但真相是：交子最初（10世纪）是四川民间商人自发发行的存款凭证，是市场的产物。宋真宗1023年，官府强行介入，设"益州交子务"，收归国营垄断。</p>
+      <p>南宋末年，为对抗蒙古军队，会子滥发：<br>
+      <span class="data-point">1160年：约1000万贯</span> →
+      <span class="data-point">1230年：约6.5亿贯</span> → 增发65倍，会子形同废纸。</p>
+      <p><strong>消费者的储蓄，被通货膨胀洗劫一空。这就是主权货币的真实历史。</strong></p>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-box-header">案例三 · 明朝大明宝钞——史上最彻底的货币劫掠</div>
+    <div class="case-box-body">
+      <p>朱元璋1375年发行大明宝钞，规定：禁止民间使用金银；强制使用宝钞；宝钞不得兑换金银；政府只发不收，没有回收机制。</p>
+      <p><span class="data-point">洪武年间</span>：1贯宝钞兑铜钱1000文 →
+         <span class="data-point">宣德年间</span>：1贯宝钞仅兑铜钱5文 → 不足70年，<strong>贬值200倍。</strong></p>
+      <p><strong>大明宝钞，是主权货币本质的最赤裸裸的暴露：皇权＝发行权＝无限征税权＝权贵资本无限积累权。</strong></p>
+    </div>
+  </div>
+
+  <h3 class="section-title">2.3 西方历史：从金本位到央行体系</h3>
+  <p>金本位（17-19世纪）是对皇权货币的第一次反抗——货币必须与黄金挂钩，政府不得随意增发。这是进步，但有根本缺陷：<em class="concept">黄金的控制权仍在少数人手中。</em></p>
+  <p>1913年，美国联邦储备法案通过，美联储成立。关键事实（常被主流叙述掩盖）：美联储<strong>不是政府机构</strong>，是私人银行的联合体。美联储增发美元，通过商业银行系统进入市场，商业银行获得第一手低息资金。</p>
+
+  <blockquote>
+    <strong>坎蒂隆效应（Cantillon Effect）：货币增发的第一受益者，永远是离发行源最近的人。</strong><br>
+    爱尔兰经济学家理查德·坎蒂隆（18世纪）早已发现：新增货币不是均匀分布给所有人，而是从发行者向外扩散。第一层是政府和大银行，最外层是普通消费者——此时物价已涨。
+    <cite>——理查德·坎蒂隆，《商业性质概论》</cite>
+  </blockquote>
+
+  <div class="highlight-box">
+    <p><strong>每一次增发，都是对普通消费者的无声征税，都是向权贵资本的无声转移。</strong></p>
+  </div>
+
+  <!-- CHAPTER 3 -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-number">三</div>
+    <div class="chapter-label">第三章</div>
+    <h2 class="chapter-title">现代主权货币体系的运作机制</h2>
+  </div>
+
+  <h3 class="section-title">3.1 央行体系：现代皇权货币的精密机器</h3>
+
+  <div class="logic-chain">
+    <span class="step">第一步：政府财政赤字（支出超过税收）</span>
+    <span class="step"><span class="arrow">↓</span> 第二步：发行国债（向市场借债）</span>
+    <span class="step"><span class="arrow">↓</span> 第三步：央行购买国债（量化宽松，凭空创造货币）</span>
+    <span class="step"><span class="arrow">↓</span> 第四步：货币进入金融系统，大银行获得廉价资金</span>
+    <span class="step"><span class="arrow">↓</span> 第五步：资产价格通胀（股市、房价、大宗商品上涨）</span>
+    <span class="step key"><span class="arrow">↓</span> 第六步：消费品通胀，消费者工资涨幅滞后，购买力下降</span>
+  </div>
+
+  <p>整个过程精密而隐蔽。<strong class="term">每一个环节，都在将财富从消费者转移到权贵。这不是市场失灵，是制度设计使然。</strong></p>
+
+  <h3 class="section-title">3.2 通货膨胀的本质：对消费者的隐性税</h3>
+  <p>通货膨胀不是"物价上涨"，物价上涨是症状。通货膨胀的本质是：<strong class="term">货币购买力下降，即消费者主权的稀释。</strong></p>
+  <p>一个消费者持有100元货币选票。政府增发货币，货币总量增加10%。这100元变成了实际上的90.9元（购买力）。这9.1元的购买力转移给了最先拿到新增货币的人——政府、大银行、关联企业。</p>
+
+  <div class="highlight-box">
+    <p><strong>通胀率vs工资增长率：权贵资本积累的精密测量</strong></p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>国家/地区</th><th>2000-2020年累计通胀</th><th>同期工资增长</th><th>差值</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>美国</td><td>约55%</td><td>约50%</td><td>-5%（工薪者净损失）</td></tr>
+        <tr><td>欧元区</td><td>约45%</td><td>约40%</td><td>-5%（工薪者净损失）</td></tr>
+        <tr><td>中国</td><td>约60%</td><td>约300%</td><td>+240%（基数极低效应）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>关键数据：2000-2020年，全球最富1%人群的财富占比从32%上升至45%。</strong>在货币总量扩张约5-10倍的背景下，普通消费者的相对份额持续缩小。这不是市场竞争的结果，是货币发行权垄断的必然数学结果。</p>
+
+  <h3 class="section-title">3.3 量化宽松（QE）：21世纪最大规模的权贵资本积累</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>央行</th><th>QE规模（2008-2022）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>美联储</td><td>资产负债表从0.9万亿→8.9万亿美元（扩张近10倍）</td></tr>
+        <tr><td>欧央行</td><td>增发约5万亿欧元</td></tr>
+        <tr><td>日本央行</td><td>增发规模占GDP约130%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>标普500指数：<span class="data-point">2009年3月676点</span> → <span class="data-point">2022年1月4800点</span>，涨幅约610%。美国前10%富人持有约89%的股票市值（2021年联储数据），后50%的人几乎不持有股票。</p>
+
+  <div class="highlight-box">
+    <p><strong>量化宽松，是主权货币体系将财富从消费者向权贵资本系统性转移的最新、最大规模的一次运作。</strong>这是坎蒂隆效应的21世纪放大版。</p>
+  </div>
+
+  <!-- CHAPTER 4 -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-number">四</div>
+    <div class="chapter-label">第四章</div>
+    <h2 class="chapter-title">区块链数字加密货币——新皮囊，旧皇权</h2>
+  </div>
+
+  <h3 class="section-title">4.1 比特币的诞生：对主权货币的反抗</h3>
+  <p>2008年，中本聪发布比特币白皮书，明确指向：不信任政府和银行，建立去中心化货币系统。这是一次真实的反抗冲动。出发点正确：<em class="concept">货币发行权不应被权贵垄断。</em></p>
+  <p>但比特币的解决方案，走向了另一个极端：<strong class="term">用算法权贵代替政治权贵。</strong></p>
+
+  <h3 class="section-title">4.2 比特币的权贵资本属性：四重分析</h3>
+
+  <div class="case-box">
+    <div class="case-box-header">第一重 · 早期持有者的压倒性优势</div>
+    <div class="case-box-body">
+      <p>据估算，中本聪持有约100万枚比特币（占总量约4.76%）。前1%的比特币地址持有约27%的比特币（2021年NBER研究）。<strong>比特币的分布比法币还要集中：这不是去中心化，是算法铸币税的早期受益者独占。</strong></p>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-box-header">第二重 · 算力即权力</div>
+    <div class="case-box-body">
+      <p>比特币挖矿需要大量ASIC芯片+电力，个人挖矿早已不可能，大型矿场垄断算力。这是<strong>算力权贵</strong>取代政治权贵，而非消费者主权。</p>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-box-header">第三重 · 交易所中心化</div>
+    <div class="case-box-body">
+      <p>99%的消费者购买比特币通过Coinbase、币安等中心化交易所。FTX崩溃是最大证明：所谓"去中心化"，最终在交易环节回到了中心化。</p>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-box-header">第四重 · 波动性使货币功能失效</div>
+    <div class="case-box-body">
+      <p>比特币单日可波动10%-30%。如果货币是消费者判断价值的凭据，凭据本身每天大幅波动，如何判断？这使比特币实际上是<strong>投机资产，不是货币</strong>——是权贵资本的游乐场：散户追涨杀跌，大资本制造波动低买高卖。</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">4.3 哈耶克的货币竞争论：诱人但无解</h3>
+  <p>哈耶克晚年提出废除货币发行的国家垄断，允许私人发行货币，货币之间竞争。这个理论看上去很美，但有三个根本缺陷：</p>
+  <ol class="styled">
+    <li><strong>发行者即权贵</strong>——谁有能力发行货币？银行、科技公司、大资本。不是消费者个体。私人货币竞争，是权贵之间的竞争。</li>
+    <li><strong>竞争结果是垄断</strong>——货币有网络效应，竞争的自然结果是一两种货币胜出垄断市场。这与现在的美元、欧元格局无本质区别。</li>
+    <li><strong>没有解决消费者均等问题</strong>——哈耶克从未回答：消费者如何获得初始货币？没有初始分配机制，消费者仍然是乞求者，而非主权者。</li>
+  </ol>
+
+  <!-- CHAPTER 5 -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-number">五</div>
+    <div class="chapter-label">第五章</div>
+    <h2 class="chapter-title">货币发行权不平等——权贵资本积累的数学证明</h2>
+  </div>
+
+  <h3 class="section-title">5.1 铸币税的数学模型</h3>
+
+  <div class="logic-chain">
+    <span class="step"><strong>主权货币体系（现行）：</strong></span>
+    <span class="step">增发ΔM，由政府/银行/关联机构优先获得</span>
+    <span class="step">消费者获得的增发份额接近0</span>
+    <span class="step key">消费者持有的M，购买力下降ΔM/M×100%</span>
+    <span class="step" style="margin-top:1rem;"><strong>人权货币体系（理想）：</strong></span>
+    <span class="step">增发ΔM，每人均等获得ΔM/N</span>
+    <span class="step key">消费者购买力不变（增发等于获得）</span>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>增发＝征税＝权贵资本增量</strong><br>
+    这就是权贵资本积累的数学机制。</p>
+  </div>
+
+  <h3 class="section-title">5.2 历史数据：货币增发与财富集中的相关性</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>年份</th><th>美国M2货币总量</th><th>前1%财富占比</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1971</td><td>约6800亿美元</td><td>约20%</td></tr>
+        <tr><td>1990</td><td>约3.3万亿美元</td><td>约27%</td></tr>
+        <tr><td>2008</td><td>约7.7万亿美元</td><td>约33%</td></tr>
+        <tr><td>2022</td><td>约21万亿美元</td><td>约45%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>货币总量增加约31倍，前1%财富占比增加约25个百分点。</strong>相关性极高。无论东西方，无论社会主义还是资本主义，主权货币增发与财富不平等高度相关。这是货币发行权垄断的系统性后果，不是政策失误，是制度必然。</p>
+
+  <h3 class="section-title">5.3 坎蒂隆效应的量化（假设央行增发1000亿）</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>受益层</th><th>描述</th><th>实际购买力增益</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第一层（大银行）</td><td>直接对手方，物价未涨时获得资金</td><td>≈ +1000亿</td></tr>
+        <tr><td>第二层（关联企业）</td><td>资产已涨10%，仍获益</td><td>≈ +900亿</td></tr>
+        <tr><td>第三层（企业员工）</td><td>工资滞后6-12月，消费品涨5%</td><td>≈ +500亿</td></tr>
+        <tr><td>最终层（普通消费者）</td><td>消费品涨10%，工资涨3%</td><td>≈ -700亿（净损失）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHAPTER 6 -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-number">六</div>
+    <div class="chapter-label">第六章</div>
+    <h2 class="chapter-title">国家主义与资本主义——两种皇权货币的同质性</h2>
+  </div>
+
+  <h3 class="section-title">6.1 表象的对立，本质的同一</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>特征</th><th>资本主义主权货币</th><th>社会主义主权货币</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>发行者</td><td>私人中央银行+国家</td><td>国家/党控制的央行</td></tr>
+        <tr><td>发行权归属</td><td>金融权贵+政治权贵</td><td>政治权贵</td></tr>
+        <tr><td>铸币税归属</td><td>大银行+政府</td><td>政府+党</td></tr>
+        <tr><td>通胀对消费者影响</td><td>购买力稀释</td><td>购买力稀释</td></tr>
+        <tr><td>本质</td><td>金融权贵皇权</td><td>政治权贵皇权</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pull-quote">
+    <p>二者唯一的区别：谁是皇。<br>
+    资本主义的皇，是金融资本家。社会主义的皇，是政治领袖。<br>
+    但对消费者而言，被谁的皇权货币统治，结果相同。</p>
+  </div>
+
+  <h3 class="section-title">6.2 中国模式：双重皇权的叠加</h3>
+  <p>中国现行货币体系，是政治权贵与金融资本的双重叠加：党的货币控制（人民银行名义独立，实质服从党中央）；国有银行的准权贵资本（四大国有银行控制贷款分配，优先流向国企、关联地产商）；房产货币化（土地出让金每年数万亿，消费者购房消耗20-30年购买力选票）。</p>
+  <p><strong>人民币名义上是人民的，但增发的人民币，人民均等享有过吗？</strong></p>
+
+  <h3 class="section-title">6.3 2008年金融危机救助：权贵资本的终极证明</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>受益方</th><th>获得资金规模</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>高盛、摩根等大银行</td><td>数千亿美元直接救助</td></tr>
+        <tr><td>AIG（大银行对手方）</td><td>1800亿美元</td></tr>
+        <tr><td>美国普通消费者（房主）</td><td>约500亿（远少于银行）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>银行制造了危机，消费者承担了损失，权贵获得了救助。社会化损失，私有化收益——这就是主权货币在危机中的运作。</strong></p>
+  </div>
+
+  <!-- CHAPTER 7 -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-number">七</div>
+    <div class="chapter-label">第七章</div>
+    <h2 class="chapter-title">货币主权的哲学批判</h2>
+  </div>
+
+  <h3 class="section-title">7.1 "主权"的意识形态欺骗</h3>
+  <p>霍布斯的社会契约论：人民让渡部分权利给国家，国家代行主权，为人民服务。理论上如此。实践上：人民让渡了货币发行权，国家拿走了，然后……权贵用了。</p>
+  <div class="highlight-box">
+    <p><strong>名义主权（人民的）→ 实质主权（权贵的）。</strong><br>
+    消费者被说服放弃了货币主权，换来了什么？通胀、债务、购买力稀释。</p>
+  </div>
+
+  <h3 class="section-title">7.2 "国家信用"神话的解构</h3>
+  <p>主权货币支持者的核心论点：货币的价值来自"国家信用"。但如果国家信用是货币价值基础，为何历史上无数"国家"的货币变废纸？</p>
+  <ol class="styled">
+    <li>魏玛共和国马克（1923年，一美元兑4.2万亿马克）</li>
+    <li>津巴布韦元（通胀率100万亿%）</li>
+    <li>委内瑞拉玻利瓦尔（近年通胀率超百万%）</li>
+  </ol>
+  <p><strong class="term">国家信用不过是"当前强制力"的代名词，强制力一旦崩溃，货币即废纸。货币的唯一合法价值基础，是消费者的自愿选择，而非国家强制。</strong></p>
+
+  <h3 class="section-title">7.3 货币的人权维度</h3>
+  <blockquote>
+    《世界人权宣言》第25条：人人有权享受为维持其本人和家属的健康和福利所需的生活水准。
+    <cite>——联合国，1948年</cite>
+  </blockquote>
+  <p>货币是消费者行使消费主权的工具。消费主权，是人权的经济表达。因此：<strong class="term">货币发行权的均等分配，是人权的必然要求。</strong>穷人持有的货币选票在通胀中持续稀释，富人持有的资产在货币增发中持续增值——主权货币，是对《世界人权宣言》的系统性违背。</p>
+
+  <!-- CHAPTER 8 -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-number">八</div>
+    <div class="chapter-label">第八章</div>
+    <h2 class="chapter-title">真实市场经济的货币条件</h2>
+  </div>
+
+  <h3 class="section-title">8.1 伪市场经济 vs 真实市场经济</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>维度</th><th>伪市场经济（现行）</th><th>真实市场经济</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>货币发行权</td><td>权贵垄断</td><td>人人均等</td></tr>
+        <tr><td>消费者地位</td><td>货币选票数量由权贵决定</td><td>均等的货币选票</td></tr>
+        <tr><td>生产方向</td><td>权贵资本驱动（什么赚钱生产什么）</td><td>消费者真实需求驱动</td></tr>
+        <tr><td>价格信号</td><td>被扭曲的货币分配所扭曲</td><td>准确反映消费者集体意志</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pull-quote">
+    <p>现行"市场经济"最大的谎言：<br>"市场反映了人民的真实需求。"<br>
+    错。市场反映的是货币选票分配下的"有效需求"，而非真实需求。<br>
+    真实市场经济的前提条件：货币选票的初始均等分配。</p>
+  </div>
+
+  <h3 class="section-title">8.2 增发总量公式的必要性</h3>
+
+  <div class="highlight-box">
+    <p><strong>【增发总量＝社会消费品零售总额】</strong>：唯一的反通胀机制</p>
+    <p style="margin-top:0.8rem;">货币总量，应当与商品服务总量匹配。若增发超过商品服务增量，通胀；若低于，通缩（也有害）。以社会消费品零售总额为增发上限，确保货币量与消费量匹配，杜绝政府以任何借口滥发。</p>
+  </div>
+
+  <!-- CHAPTER 9 -->
+  <div class="chapter" id="ch9">
+    <div class="chapter-number">九</div>
+    <div class="chapter-label">第九章</div>
+    <h2 class="chapter-title">制度设计——人权货币的具体蓝图</h2>
+  </div>
+
+  <h3 class="section-title">9.1 三个核心原则</h3>
+  <ol class="styled">
+    <li><strong>发行主体是人，不是国家、不是机构</strong>——每个人从出生起，自动拥有货币账户。死亡后，账户自动关闭，不可继承（货币选票是消费主权，不是财产，不可世袭）。</li>
+    <li><strong>发行量均等，不因任何理由差异化</strong>——不因国籍、种族、性别、职业、收入而差异化。人人一份，天然平等。</li>
+    <li><strong>增发有限制，总量受消费总额约束</strong>——算法自动计算，区块链透明可查，无人可篡改。</li>
+  </ol>
+
+  <h3 class="section-title">9.2 与现行制度的本质区别</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>维度</th><th>主权货币（现行）</th><th>人权货币（目标）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>发行权归属</td><td>国家/央行（权贵）</td><td>每个人（消费者）</td></tr>
+        <tr><td>增发受益者</td><td>政府/大银行（权贵优先）</td><td>每个人（均等）</td></tr>
+        <tr><td>通胀机制</td><td>权贵购买力增，消费者减</td><td>无通胀（增发=分配）</td></tr>
+        <tr><td>货币选票平等</td><td>否（财富决定选票多少）</td><td>基础选票人人均等</td></tr>
+        <tr><td>制度基础</td><td>强制力（法定货币）</td><td>自愿使用（消费者认可）</td></tr>
+        <tr><td>民主性质</td><td>伪民主（经济投票不平等）</td><td>真民主（一人一基础票）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="section-title">9.3 过渡机制：渐进三阶段</h3>
+  <ol class="styled">
+    <li><strong>第一阶段（1-5年）：信息层</strong>——建立全球消费者货币选票数据库（区块链）。试点地区实施：人权货币补充发放，与现行货币并行。</li>
+    <li><strong>第二阶段（5-15年）：并行层</strong>——人权货币与主权货币并行，消费者自由选择使用。AI生产系统优先接受人权货币选票，生产方向随之调整。</li>
+    <li><strong>第三阶段（15-30年）：替代层</strong>——人权货币因被消费者广泛接受，逐渐替代主权货币。全球统一"世界币"体系，不基于任何国家主权，基于人人主权。</li>
+  </ol>
+
+  <!-- CHAPTER 10 -->
+  <div class="chapter" id="ch10">
+    <div class="chapter-number">十</div>
+    <div class="chapter-label">第十章</div>
+    <h2 class="chapter-title">反驳批评与澄清误解</h2>
+  </div>
+
+  <h3 class="section-title">批评一："这是共产主义"</h3>
+  <div class="case-box">
+    <div class="case-box-header">精确回应</div>
+    <div class="case-box-body">
+      <p>共产主义：国家控制生产（消灭市场）→ 人权货币：消费者主权主导市场。</p>
+      <p>共产主义：消灭私有财产→ 人权货币：私有财产合法，只是初始货币均等。</p>
+      <p><strong>人权货币是比现行资本主义更彻底的市场经济，不是共产主义。</strong>它解决的问题，恰恰是共产主义和资本主义共同无法解决的：消费者初始货币选票的平等。</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">批评二："人会变懒"</h3>
+  <div class="case-box">
+    <div class="case-box-header">精确回应</div>
+    <div class="case-box-body">
+      <p>芬兰基本收入实验（2017-2018）：2000人实验，结果：就业率不降反升，心理健康显著改善，创业意愿增加。</p>
+      <p><strong>"人会变懒"是生产主义的恐吓，不是事实。</strong>强迫劳动的反面，不是绝对的不劳动，是自愿选择从事有意义的活动。</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">批评三："有人贡献多，应该得多"</h3>
+  <div class="case-box">
+    <div class="case-box-header">精确回应</div>
+    <div class="case-box-body">
+      <p>政治选票均等，是政治民主的基础。一个博士，一票。一个文盲，一票。</p>
+      <p><strong>钞票是消费选票，均等是消费民主的基础。</strong></p>
+      <p>人权货币：每人均等的基础货币（底线消费主权）。市场货币：消费者额外支付的货币（对生产价值的奖励）。两者并行，不矛盾。</p>
+    </div>
+  </div>
+
+  <h3 class="section-title">批评四："区块链已经去中心化了"</h3>
+  <div class="case-box">
+    <div class="case-box-header">精确回应</div>
+    <div class="case-box-body">
+      <p>比特币：挖矿获得，算力决定——权贵优先。以太坊：质押获得，持有量决定——权贵优先。CBDC：央行发行，国家垄断——权贵优先。</p>
+      <p><strong>以上三种区块链货币，都是权贵货币披上了技术外衣。技术是工具，消费者主权是目标。</strong></p>
+    </div>
+  </div>
+
+  <!-- CHAPTER 11 -->
+  <div class="chapter" id="ch11">
+    <div class="chapter-number">十一</div>
+    <div class="chapter-label">第十一章</div>
+    <h2 class="chapter-title">当下——主权货币体系的临界点</h2>
+  </div>
+
+  <h3 class="section-title">11.1 三大危机信号</h3>
+
+  <div class="highlight-box">
+    <p><strong>信号一：全球债务危机</strong><br>
+    全球主权债务总量（2024年）：约320万亿美元（GDP的约330%）。这些债务，最终由消费者（纳税人）偿还，通过增发货币（通胀）侵蚀。<strong>主权货币体系正在吃掉未来消费者的选票。</strong></p>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>信号二：AI失业与消费者购买力崩溃</strong><br>
+    AI取代人类劳动，工资收入下降，消费者货币选票减少。但商品服务总量因AI生产而增加。<strong>出现了历史上前所未有的矛盾：生产过剩，消费不足——因为消费者没有货币选票。</strong></p>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>信号三：货币信任危机</strong><br>
+    通胀高企→消费者不信任法币→寻找替代。各国货币战争（贬值竞争）。央行公信力下降→货币制度合法性动摇。<strong>主权货币体系的信任基础正在侵蚀。历史的窗口期正在开启。</strong></p>
+  </div>
+
+  <h3 class="section-title">11.2 AI是解放的技术基础</h3>
+  <ol class="styled">
+    <li><strong>生产不再依赖人类劳动</strong>——AI工厂生产商品，"不劳者不得食"的强制力消失。人权货币在道德上的阻力降低。</li>
+    <li><strong>实时统计消费者需求</strong>——AI可以实时汇总80亿消费者的货币选票投向，精准指导生产方向。消费价值论实践的技术基础。</li>
+    <li><strong>去中心化货币发行的技术可行性</strong>——区块链+生物识别+智能合约，实现每人一个不可复制的货币账户，自动均等增发，无需央行介入。</li>
+  </ol>
+
+  <div class="section-divider">✦ ✦ ✦</div>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <h2>结论：从皇权货币到人权货币——文明的必然跨越</h2>
+
+    <p><strong>命题一：主权货币＝皇权货币</strong><br>
+    无论"主权"冠以哪个国家之名，发行权的垄断，使货币成为权贵的工具，不是消费者的工具。</p>
+
+    <p><strong>命题二：皇权货币＝权贵资本的永动机</strong><br>
+    每一次增发，通过坎蒂隆效应，将购买力从消费者转移给权贵。不需要暴力，仅凭货币发行权的优先性，权贵资本自动积累。</p>
+
+    <p><strong>命题三：区块链数字加密货币＝新皇权货币</strong><br>
+    技术去中心化，但初始分配的权贵化，使区块链货币成为新形态的皇权货币。算法权贵，不比政治权贵更民主。</p>
+
+    <p><strong>命题四：人权货币是唯一出路</strong><br>
+    钞票选票发行一人一份，人人均等享有。增发总量＝社会消费品零售总额。这是消费者主权的货币制度表达。</p>
+
+    <div class="logic-chain">
+      <span class="step">事实：人是消费者</span>
+      <span class="step"><span class="arrow">↓</span> 货币：消费者判断价值的选票凭据</span>
+      <span class="step"><span class="arrow">↓</span> 选票：一人一票（民主的基础）</span>
+      <span class="step"><span class="arrow">↓</span> 现实：钞票发行权在权贵手中</span>
+      <span class="step"><span class="arrow">↓</span> 后果：选票不均等→权贵资本持续积累→消费者持续受损</span>
+      <span class="step key"><span class="arrow">↓</span> 主权货币＝皇权货币＝权贵资本永动机</span>
+      <span class="step key"><span class="arrow">↓</span> 解：钞票选票发行一人一份，人人均等享有</span>
+      <span class="step"><span class="arrow">↓</span> AI执行生产，消费者行使主权</span>
+      <span class="step key"><span class="arrow">↓</span> 真实市场经济：消费者需求→生产方向→人类从现代奴隶制解放</span>
+    </div>
+
+    <div class="final-quote">
+      <p>米塞斯：钞票每一分都是选票。</p>
+      <p>曼德尔：选票一人一票。钞票不是。</p>
+      <p><strong>人权货币：使钞票真正成为一人一票的选票。<br>
+      这是人类货币史五千年，第一次真正的民主。</strong></p>
+    </div>
+
+    <div class="timestamp">时间戳：2026-05-21 ｜ 消费者主权论丛</div>
+  </div>
+
+</main>
+
+</body>
+</html>
 
