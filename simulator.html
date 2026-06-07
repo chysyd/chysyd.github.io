@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>人权货币模拟器 · 钞票选票一人一份 · 人人均等</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
+  body {
+    background-color: #fafaf8;
+    font-family: -apple-system, 'Times New Roman', 'Songti SC', 'Noto Serif SC', 'Georgia', serif;
+    color: #1e1e1c;
+    line-height: 1.55;
+    padding: 40px 24px;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+
+  .site-header {
+    margin-bottom: 32px;
+    border-bottom: 1px solid #e6e4dc;
+    padding-bottom: 20px;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    color: #1a2c3e;
+    margin-bottom: 6px;
+  }
+
+  .site-sub {
+    font-size: 0.85rem;
+    color: #6c7a89;
+    margin-bottom: 18px;
+  }
+
+  .back-links {
+    display: flex;
+    gap: 20px;
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+
+  .back-links a {
+    color: #2c7da0;
+    text-decoration: none;
+    background: #f0f4f8;
+    padding: 4px 12px;
+    border-radius: 20px;
+    transition: background 0.2s;
+  }
+
+  .back-links a:hover {
+    background: #e2e8f0;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: #1e293b;
+    letter-spacing: -0.3px;
+  }
+
+  .subhead {
+    font-size: 1rem;
+    color: #5a6e7c;
+    margin-bottom: 32px;
+    border-left: 3px solid #cbd5e1;
+    padding-left: 16px;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #eaeef2;
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  }
+
+  .param-group {
+    margin-bottom: 24px;
+  }
+
+  .param-label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #1e2f3e;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    margin: 8px 0;
+    accent-color: #2c7da0;
+  }
+
+  .param-value {
+    font-family: monospace;
+    font-size: 1rem;
+    background: #f8fafc;
+    padding: 4px 8px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .result-box {
+    background: #f0f7fc;
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .amount {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #2c7da0;
+    margin: 12px 0 4px;
+    line-height: 1.2;
+  }
+
+  .amount-unit {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #5a6e7c;
+  }
+
+  .footnote {
+    font-size: 0.75rem;
+    color: #7f8c8d;
+    text-align: center;
+    margin-top: 36px;
+    border-top: 1px solid #eef2f6;
+    padding-top: 24px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="site-header">
+    <div class="site-title">人是消费者 非生产者</div>
+    <div class="site-sub">认知革命 · 制度重建 · 消费者主权</div>
+    <div class="back-links">
+      <a href="index.html">← 返回主页</a>
+      <a href="dialogues.html">📚 AI对话录</a>
+      <a href="essays.html">📄 论文集</a>
+    </div>
+  </div>
+
+  <h1>💰 人权货币模拟器</h1>
+  <div class="subhead">
+    【钞票选票发行一人一份，人人均等享有】<br>
+    增发总量 = 社会消费品零售总额 · 每人每月 = 总额 ÷ 人口 ÷ 12
+  </div>
+
+  <div class="card">
+    <div class="param-group">
+      <div class="param-label">
+        <span>🌍 全球人口</span>
+        <span id="popValue" class="param-value">83 亿</span>
+      </div>
+      <input type="range" id="population" min="10" max="200" step="1" value="83">
+      <div style="font-size:0.7rem; color:#6c7a89;">单位：亿人</div>
+    </div>
+
+    <div class="param-group">
+      <div class="param-label">
+        <span>📦 年社会消费品零售总额</span>
+        <span id="consumValue" class="param-value">50 万亿元</span>
+      </div>
+      <input type="range" id="consumption" min="20" max="200" step="1" value="50">
+      <div style="font-size:0.7rem; color:#6c7a89;">单位：万亿人民币（参考2025年中国约50万亿，全球约250万亿）</div>
+    </div>
+
+    <div class="param-group">
+      <div class="param-label">
+        <span>🏦 每月发放金额（每人）</span>
+        <span id="monthlyAmount" class="param-value">— 元</span>
+      </div>
+      <div class="result-box">
+        <div style="font-size:0.9rem;">按当前参数，每人每月可获</div>
+        <div class="amount" id="monthlyDisplay">0</div>
+        <div class="amount-unit">元</div>
+        <div style="margin-top:12px; font-size:0.85rem;">每年总计 ≈ <span id="yearlyDisplay">0</span> 元</div>
+        <div style="margin-top:12px; font-size:0.75rem;">💡 实际锚定消费品总额，不通胀不缩，这是消费者主权的基本保障</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    ⚡ 模拟基于【消费价值论】核心公式：<br>
+    每月发行量 = (全球消费品零售总额 / 全球人口) / 12。<br>
+    这保证了货币总量与真实消费品价值同步，彻底消灭通胀与债务剥削。<br>
+    “你们必晓得真理，真理必叫你们得以自由。”
+  </div>
+</div>
+
+<script>
+  const popSlider = document.getElementById('population');
+  const consSlider = document.getElementById('consumption');
+  const popValue = document.getElementById('popValue');
+  const consumValue = document.getElementById('consumValue');
+  const monthlyDisplay = document.getElementById('monthlyDisplay');
+  const yearlyDisplay = document.getElementById('yearlyDisplay');
+  const monthlyAmountSpan = document.getElementById('monthlyAmount');
+
+  function update() {
+    let pop = parseFloat(popSlider.value);          // 亿人
+    let cons = parseFloat(consSlider.value);        // 万亿元/年
+    let popNum = pop * 1e8;                         // 人
+    let consYuan = cons * 1e12;                     // 元/年
+    let monthly = consYuan / popNum / 12;
+    let yearly = monthly * 12;
+
+    popValue.innerText = pop + ' 亿';
+    consumValue.innerText = cons + ' 万亿元';
+    monthlyDisplay.innerText = monthly.toFixed(0);
+    yearlyDisplay.innerText = yearly.toFixed(0);
+    monthlyAmountSpan.innerText = monthly.toFixed(0) + ' 元';
+  }
+
+  popSlider.addEventListener('input', update);
+  consSlider.addEventListener('input', update);
+  update();
+</script>
+</body>
+</html>
