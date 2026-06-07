@@ -148,6 +148,12 @@
     border-top: 1px solid #eef2f6;
     padding-top: 24px;
   }
+
+  @media (max-width: 600px) {
+    .amount {
+      font-size: 2rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -171,20 +177,20 @@
   <div class="card">
     <div class="param-group">
       <div class="param-label">
-        <span>🌍 全球人口</span>
-        <span id="popValue" class="param-value">83 亿</span>
+        <span>🌍 总人口</span>
+        <span id="popValue" class="param-value">83.00 亿</span>
       </div>
-      <input type="range" id="population" min="0" max="200" step="1" value="83">
-      <div style="font-size:0.7rem; color:#6c7a89;">单位：亿人</div>
+      <input type="range" id="population" min="0" max="200" step="0.01" value="83">
+      <div style="font-size:0.7rem; color:#6c7a89;">单位：亿人（步长 10 万人 = 0.01 亿）</div>
     </div>
 
     <div class="param-group">
       <div class="param-label">
         <span>📦 年社会消费品零售总额</span>
-        <span id="consumValue" class="param-value">5万亿元</span>
+        <span id="consumValue" class="param-value">250.00 万亿元</span>
       </div>
-      <input type="range" id="consumption" min="0" max="2000" step="1" value="50">
-      <div style="font-size:0.7rem; color:#6c7a89;">单位：万亿人民币（参考2025年中国约50万亿，全球约250万亿）</div>
+      <input type="range" id="consumption" min="0" max="2000" step="0.01" value="250">
+      <div style="font-size:0.7rem; color:#6c7a89;">单位：万亿元（步长 100 亿元 = 0.01 万亿元）</div>
     </div>
 
     <div class="param-group">
@@ -204,7 +210,7 @@
 
   <div class="footnote">
     ⚡ 模拟基于【消费价值论】核心公式：<br>
-    每月发行量 = (全球消费品零售总额 / 全球人口) / 12。<br>
+    每月发行量 = (全球消费品零售总额 / 总人口) / 12。<br>
     这保证了货币总量与真实消费品价值同步，彻底消灭通胀与债务剥削。<br>
     “你们必晓得真理，真理必叫你们得以自由。”
   </div>
@@ -224,11 +230,21 @@
     let cons = parseFloat(consSlider.value);        // 万亿元/年
     let popNum = pop * 1e8;                         // 人
     let consYuan = cons * 1e12;                     // 元/年
+
+    // 显示格式：保留两位小数
+    popValue.innerText = pop.toFixed(2) + ' 亿';
+    consumValue.innerText = cons.toFixed(2) + ' 万亿元';
+
+    if (popNum === 0) {
+      monthlyDisplay.innerText = '0';
+      yearlyDisplay.innerText = '0';
+      monthlyAmountSpan.innerText = '0 元';
+      return;
+    }
+
     let monthly = consYuan / popNum / 12;
     let yearly = monthly * 12;
 
-    popValue.innerText = pop + ' 亿';
-    consumValue.innerText = cons + ' 万亿元';
     monthlyDisplay.innerText = monthly.toFixed(0);
     yearlyDisplay.innerText = yearly.toFixed(0);
     monthlyAmountSpan.innerText = monthly.toFixed(0) + ' 元';
